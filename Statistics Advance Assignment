@@ -1,0 +1,138 @@
+
+Open In Colab
+Q1. What is the Probability density function?
+The Probability Density Function (PDF) is a function that describes the probability distribution of a continuous random variable. It is used to calculate the probability of a random variable taking a certain value within a given range of values.
+
+The PDF is often denoted by the symbol f(x), where x is the random variable. The PDF can be used to determine other statistical measures, such as the mean and variance of the distribution.
+
+Q2. What are the types of Probability distribution?
+There are two main types of probability distributions: discrete and continuous.
+
+Discrete Probability Distributions:-
+
+It is used to model the probability of discrete events, such as the outcome of a coin toss or the number of students in a class who score above a certain grade.
+Examples of discrete probability distributions include the binomial distribution, the Poisson distribution, and the geometric distribution.
+Continuous Probability Distributions:-
+
+It is used to model the probability of continuous events, such as the height or weight of a person, or the time it takes to complete a task.
+Examples of continuous probability distributions include the normal distribution, the uniform distribution, and the exponential distribution.
+Q3. Write a Python function to calculate the probability density function of a normal distribution with given mean and standard deviation at a given point.
+
+import math
+
+def normalPdf(x, mean, std_dev):
+    variance = std_dev**2
+    exp_term = math.exp(-(x-mean)**2/(2*variance))
+    coeff = 1/(math.sqrt(2*math.pi*variance))
+    pdf = coeff * exp_term
+    return pdf
+
+pdf_value = normalPdf(x=2, mean=0, std_dev=1)
+print(pdf_value)
+     
+0.05399096651318806
+Q4. What are the properties of Binomial distribution? Give two examples of events where binomial distribution can be applied.
+The Binomial distribution is a discrete probability distribution that is used to model the number of successes in a fixed number of independent trials with two possible outcomes (usually labeled as success or failure).
+The Binomial distribution has the following properties:
+
+The trials are independent.
+Each trial has two possible outcomes (success or failure).
+The probability of success is constant for each trial.
+The trials are identical in nature.
+Two examples of events where Binomial distribution can be applied are:
+
+Tossing a Coin.
+Manufacturing Defects.
+Q5. Generate a random sample of size 1000 from a binomial distribution with probability of success 0.4 and plot a histogram of the results using matplotlib.
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# set the parameters
+n = 10
+p = 0.4
+size = 1000
+
+# generate the random sample
+binomial_sample = np.random.binomial(n, p, size=size)
+
+# plot the histogram
+plt.hist(binomial_sample, bins=range(0, n+1), align='left', density=True)
+plt.xlabel('Number of Successes')
+plt.ylabel('Probability')
+plt.title('Binomial Distribution with n=10, p=0.4')
+plt.show()
+
+     
+
+Q6. Write a Python function to calculate the cumulative distribution function of a Poisson distribution with given mean at a given point.
+
+import math
+
+def poissonCdf(x, mean):
+    cdf = 0
+    for i in range(x+1):
+        cdf += math.exp(-mean) * (mean**i) / math.factorial(i)
+    return cdf
+
+cdfValue = poissonCdf(x=2, mean=3)
+print(cdfValue)
+
+
+     
+0.42319008112684353
+Q7. How Binomial distribution different from Poisson distribution?
+Binomial and Poisson distributions are both used to model the number of occurrences of a certain event in a fixed number of trials or time intervals. However, they differ in the following ways:
+
+Assumptions: The Binomial distribution assumes that each trial is independent, has only two possible outcomes (success or failure), and the probability of success is constant across all trials. The Poisson distribution assumes that the events occur randomly and independently of each other, and the rate of occurrence is constant over time or space.
+
+Type of events: The Binomial distribution is used to model the number of successes in a fixed number of trials, while the Poisson distribution is used to model the number of events that occur in a fixed time interval or space.
+
+Parameters: The Binomial distribution has two parameters, n (the number of trials) and p (the probability of success in each trial), while the Poisson distribution has one parameter, λ (the rate of occurrence of the event).
+
+Nature of the variables: The Binomial distribution is a discrete probability distribution, since the number of successes can only take on integer values. The Poisson distribution is also a discrete probability distribution, but can take on any non-negative integer value.
+
+Approximation: The Poisson distribution can be used as an approximation of the Binomial distribution when n is large and p is small, since in this case the mean of the Binomial distribution (np) approaches the rate parameter of the Poisson distribution (λ=np). This is known as the Poisson approximation to the Binomial distribution.
+
+Q8. Generate a random sample of size 1000 from a Poisson distribution with mean 5 and calculate the sample mean and variance.
+
+import numpy as np
+
+# set the parameters
+mean = 5
+size = 1000
+
+# generate the random sample
+poisson_sample = np.random.poisson(mean, size=size)
+
+# calculate the sample mean and variance
+sample_mean = np.mean(poisson_sample)
+sample_var = np.var(poisson_sample, ddof=1)
+
+print("Sample Mean: ", sample_mean)
+print("Sample Variance: ", sample_var)
+
+     
+Sample Mean:  4.957
+Sample Variance:  4.399550550550551
+Q9. How mean and variance are related in Binomial distribution and Poisson distribution?
+The binomial distribution and the Poisson distribution are two commonly used probability distributions that are used to model different types of events.
+
+In the case of the binomial distribution, which models the number of successes in a fixed number of independent trials, the mean (μ) and variance (σ^2) are related as follows:
+
+μ = np σ^2 = np(1-p)
+
+Where n is the number of trials, p is the probability of success in each trial.
+
+In the case of the Poisson distribution, which models the number of events occurring in a fixed interval of time or space, the mean (μ) and variance (σ^2) are related as follows:
+
+μ = λ σ^2 = λ
+
+Where λ is the average number of events occurring in the fixed interval.
+
+Q10. In normal distribution with respect to mean position, where does the least frequent data appear?
+In a normal distribution, the least frequent data appears in the tails of the distribution, which are located farthest away from the mean.
+
+In a symmetrical normal distribution, about 68% of the data falls within one standard deviation of the mean, about 95% of the data falls within two standard deviations of the mean, and about 99.7% of the data falls within three standard deviations of the mean. The remaining 0.3% of the data is split equally between the two tails of the distribution, with 0.15% of the data falling to the left of the mean and 0.15% of the data falling to the right of the mean.
+
+Therefore, the least frequent data in a normal distribution with respect to mean position appears in the tails, which are located more than three standard deviations away from the mean. These extreme values are also referred to as outliers.
